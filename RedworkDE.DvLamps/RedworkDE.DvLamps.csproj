@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Basic Settings -->
+    <TargetFramework>net46</TargetFramework>
+    <Platforms>x64</Platforms>
+    <Configurations>Debug_BepInEx;Debug_UMM;Release_BepInEx;Release_UMM</Configurations>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <Optimize>True</Optimize>
+
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
+    <GameDirectory Condition="'$(GameDirectory)'==''">C:\DerailValley\</GameDirectory>
+    <FrameworkPathOverride>$(GameDirectory)DerailValley_Data\Managed\</FrameworkPathOverride>
+
+    <Authors>RedworkDE</Authors>
+    <Copyright>(c) 2020 RedworDE</Copyright>
+    <Version>1.0.0</Version>
+
+    <!-- Configuration Switches -->
+    <_IsDebug>False</_IsDebug>
+    <_IsDebug Condition="$(Configuration.Contains('Debug'))">True</_IsDebug>
+    <_IsPublish>False</_IsPublish>
+    <_IsPublish Condition="$(Configuration.Contains('Release'))">True</_IsPublish>
+    <_IsBepInEx>False</_IsBepInEx>
+    <_IsBepInEx Condition="$(Configuration.Contains('BepInEx'))">True</_IsBepInEx>
+    <_IsUMM>False</_IsUMM>
+    <_IsUMM Condition="$(Configuration.Contains('UMM'))">True</_IsUMM>
+
+    <LoaderName Condition="$(_IsBepInEx)">BepInEx</LoaderName>
+    <LoaderName Condition="$(_IsUMM)">UMM</LoaderName>
+
+    <!-- Configuration dependant settings -->
+    <DefineConstants Condition="$(_IsDebug)">$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <DefineConstants Condition="$(_IsPublish)">$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <DefineConstants Condition="$(_IsBepInEx)">$(DefineConstants);BepInEx</DefineConstants>
+    <DefineConstants Condition="$(_IsUMM)">$(DefineConstants);UMM</DefineConstants>
+
+    <BaseOutputDirectory Condition="$(_IsDebug)">$(GameDirectory)</BaseOutputDirectory>
+    <BaseOutputDirectory Condition="$(_IsPublish)">..\publish\$(LoaderName)\</BaseOutputDirectory>
+
+  </PropertyGroup>
+
+  <!-- Mod loaders, most provide an entry point and harmony -->
+  <Choose>
+    <When Condition="$(_IsBepInEx)">
+      <PropertyGroup>
+        <OutputPath>$(BaseOutputDirectory)BepInEx\plugins\$(MSBuildProjectName)</OutputPath>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="$(GameDirectory)BepInEx\core\BepInEx.dll" Private="False" />
+        <Reference Include="$(GameDirectory)BepInEx\core\BepInEx.Harmony.dll" Private="False" />
+        <Reference Include="$(GameDirectory)BepInEx\core\0Harmony.dll" Private="False" />
+        <None Remove="Info.json" />
+      </ItemGroup>
+    </When>
+    <When Condition="$(_IsUMM)">
+      <!-- todo: check UMMs harmony version and loggin facilities -->
+      <PropertyGroup>
+        <OutputPath>$(BaseOutputDirectory)Mods\$(MSBuildProjectName)</OutputPath>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="$(GameDirectory)DerailValley_Data\Managed\UnityModManager\UnityModManager.dll" Private="False" />
+        <Reference Include="$(GameDirectory)DerailValley_Data\Managed\UnityModManager\0Harmony.dll" Private="False" />
+       
+        <None Update="Info.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <_ModLoaderError>True</_ModLoaderError>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <ItemGroup>
+    <None Remove=".gitignore" />
+    <None Remove="DvTimeEmbedded.dll" />
+    <Reference Include="DvTimeEmbedded.dll" />
+    <None Remove="lamps" />
+    <EmbeddedResource Include="lamps" Visible="False" />
+  </ItemGroup>
+
+  <!-- add one entry for each assembly where access to private members is required -->
+  <ItemGroup>
+    <PackageReference Include="RedworkDE.Publicizer" Version="0.1.0" />
+    <PublicizeAssembly Include="Assembly-CSharp" Private="True" />
+    <PublicizeAssembly Include="0Harmony" Private="True" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <!-- Derail Valleys DLL to reference, everything that cant be referenced here must be copied to the build output -->
+    <Reference Include="Assembly-CSharp" />
+    <Reference Include="DV.Utils" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe" />
+    <Reference Include="Newtonsoft.Json" />
+    <Reference Include="Unity.TextMeshPro" />
+    <Reference Include="UnityEngine" />
+    <Reference Include="UnityEngine.AssetBundleModule" />
+    <Reference Include="UnityEngine.AudioModule" />
+    <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="UnityEngine.ImageConversionModule" />
+    <Reference Include="UnityEngine.IMGUIModule" />
+    <Reference Include="UnityEngine.PhysicsModule" />
+    <Reference Include="UnityEngine.ScreenCaptureModule" />
+    <Reference Include="UnityEngine.StreamingModule" />
+    <Reference Include="UnityEngine.TerrainModule" />
+    <Reference Include="UnityEngine.TerrainPhysicsModule" />
+    <Reference Include="UnityEngine.TextRenderingModule" />
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="UnityEngine.UIModule" />
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule" />
+    <Reference Include="UnityEngine.UnityWebRequestModule" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Error Text="You must define exactly one of the compilation constants 'BepInEx' and 'UMM'" Condition="'$(_ModLoaderError)' != ''" />
+    <Error Condition="!Exists('lamps')" Text="lamps bundle must be build, open the unity project, click Build/Lamps Bundle" />
+
+    <WriteLinesToFile File="$(IntermediateOutputPath)\AutoLoad.cs" Lines="$([System.IO.File]::ReadAllText(AutoLoad.cs).Replace('$Version','$(Version)'))" Overwrite="true" Condition="$(_IsBepInEx)" />
+    <ItemGroup Condition="$(_IsBepInEx)">
+      <Compile Remove="AutoLoad.cs" />
+      <Compile Include="$(IntermediateOutputPath)\AutoLoad.cs" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <WriteLinesToFile File="$(OutputPath)\Info.json" Lines="$([System.IO.File]::ReadAllText($(OutputPath)\Info.json).Replace('$Version','$(Version)'))" Overwrite="true" Condition="$(_IsUMM)" />
+    <Exec Command="powershell Compress-Archive -DestinationPath '$(BaseOutputDirectory)..\$(MSBuildProjectName)-$(Version)-$(LoaderName).zip' -Path '$(OutputPath)' -Force" Condition="$(_IsPublish)"></Exec>
+  </Target>
+
+</Project>

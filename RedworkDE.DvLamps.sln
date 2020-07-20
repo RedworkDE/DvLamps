@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedworkDE.DvLamps", "RedworkDE.DvLamps\RedworkDE.DvLamps.csproj", "{61CDC536-4F20-F6B0-7A32-71021242F0B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorScripts", "EditorScripts\EditorScripts.csproj", "{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_BepInEx|x64 = Debug_BepInEx|x64
+		Debug_UMM|x64 = Debug_UMM|x64
+		Release_BepInEx|x64 = Release_BepInEx|x64
+		Release_UMM|x64 = Release_UMM|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Debug_BepInEx|x64.ActiveCfg = Debug_BepInEx|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Debug_BepInEx|x64.Build.0 = Debug_BepInEx|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Debug_UMM|x64.ActiveCfg = Debug_UMM|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Debug_UMM|x64.Build.0 = Debug_UMM|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release_BepInEx|x64.ActiveCfg = Release_BepInEx|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release_BepInEx|x64.Build.0 = Release_BepInEx|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release_UMM|x64.ActiveCfg = Release_UMM|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release_UMM|x64.Build.0 = Release_UMM|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release|x64.ActiveCfg = Release_UMM|x64
+		{61CDC536-4F20-F6B0-7A32-71021242F0B0}.Release|x64.Build.0 = Release_UMM|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Debug_BepInEx|x64.ActiveCfg = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Debug_BepInEx|x64.Build.0 = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Debug_UMM|x64.ActiveCfg = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Debug_UMM|x64.Build.0 = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release_BepInEx|x64.ActiveCfg = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release_BepInEx|x64.Build.0 = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release_UMM|x64.ActiveCfg = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release_UMM|x64.Build.0 = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release|x64.ActiveCfg = Release|x64
+		{F456D250-CF92-4CBA-B09F-C90C63C4E8F6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72CB6196-6DE3-4295-A7BC-47A1CA79F4D9}
+	EndGlobalSection
+EndGlobal
