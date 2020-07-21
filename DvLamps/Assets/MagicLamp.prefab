@@ -45,11 +45,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3350425312271003290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1589030332, guid: 5b3526ea09efd6cae81ff7704501f734, type: 3}
+  m_Script: {fileID: 1589030332, guid: 29486fe0b871ffeca76cef1777c919bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Magic Lamp
-  itemDescription: It does magic.
+  itemDescription: It does magic
   immuneToDumpster: 0
   itemPrefabName: RedworkDE.DvLamps.MagicLamp
   itemIconSprite: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3350425312271003290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 265250263, guid: 5b3526ea09efd6cae81ff7704501f734, type: 3}
+  m_Script: {fileID: 265250263, guid: 29486fe0b871ffeca76cef1777c919bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   disallowShortTriggerLockHold: 0
@@ -4941,11 +4941,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1193756757633091706}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f0d2038370c3e5c4085278895ff01e59,
-        type: 3}
-      propertyPath: m_Name
-      value: lamp
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f0d2038370c3e5c4085278895ff01e59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5015,6 +5010,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f0d2038370c3e5c4085278895ff01e59,
+        type: 3}
+      propertyPath: m_Name
+      value: lamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0d2038370c3e5c4085278895ff01e59, type: 3}

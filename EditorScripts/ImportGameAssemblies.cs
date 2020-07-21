@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using Mono.Cecil;
 using UnityEditor;
 using UnityEngine;
@@ -46,6 +48,7 @@ public class ImportGameAssemblies
 		var tn = AssemblyNameFixup.Mask(dllName);
 
 		var target = new FileInfo(Path.Combine(ASSEMBLIES_LOCAL, tn));
+		var targetMeta = new FileInfo(Path.Combine(ASSEMBLIES_LOCAL, tn + ".meta"));
 		var source = new FileInfo(Path.Combine(DvInstall, ASSEMBLIES_REMOTE, dllName));
 
 		if (!source.Exists) return false;
@@ -58,6 +61,13 @@ public class ImportGameAssemblies
 		var bytes = File.ReadAllBytes(source.FullName);
 		AssemblyNameFixup.Mask(bytes);
 		File.WriteAllBytes(target.FullName, bytes);
+
+		if (!targetMeta.Exists)
+		{
+			var md5 = new MD5Cng().ComputeHash(Encoding.UTF8.GetBytes(dllName));
+			var guid = new Guid(md5);
+			File.WriteAllText(targetMeta.FullName, $"fileFormatVersion: 2\nguid: {guid:N}\nDefaultImporter:\n  externalObjects: {{}}\n  userData: \n  assetBundleName: \n  assetBundleVariant: \n");
+		}
 
 		return true;
 	}
