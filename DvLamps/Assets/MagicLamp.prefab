@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193756757633091706}
+  - component: {fileID: 4649881698025769187}
   - component: {fileID: 7532395888865986194}
   - component: {fileID: 1723416908716111507}
   - component: {fileID: 92270403917339643}
@@ -36,6 +37,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4649881698025769187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350425312271003290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 703504893, guid: c1e67a0b8b2032179eed7e88da4fd15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: 'To create a ingame item, it needs the InventoryItemSpec and Item components.
+
+
+    In ItemSpec you must at least set a name and a prefab name for which a Resources.Load
+    hook exists that loads this asset.'
 --- !u!114 &7532395888865986194
 MonoBehaviour:
   m_ObjectHideFlags: 0
