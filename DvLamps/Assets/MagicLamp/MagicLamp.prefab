@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2049398202191463269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3818066605146003299}
+  m_Layer: 0
+  m_Name: '[anchor]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3818066605146003299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049398202191463269}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.006, z: -0.119}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1193756757633091706}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3350425312271003290
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +64,7 @@ Transform:
   - {fileID: 1269895280120154971}
   - {fileID: 8721070956000809239}
   - {fileID: 8800414442524536699}
+  - {fileID: 3818066605146003299}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -71,12 +102,13 @@ MonoBehaviour:
   immuneToDumpster: 0
   itemPrefabName: RedworkDE.DvLamps.MagicLamp
   itemIconSprite: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  previewPrefab: {fileID: 3607050556633534066, guid: 3c94df1cbdb55fa43900e5b66c9eedd1,
+    type: 3}
   previewBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  applyRotationOnItemTakenOutFromInventory: 0
-  previewRotation: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.13, y: 0.1452366, z: 0.3}
+  applyRotationOnItemTakenOutFromInventory: 1
+  previewRotation: {x: -90, y: 0, z: 0}
 --- !u!114 &1723416908716111507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9ae17ca9cc4254ab2767919ed12437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particles: {fileID: 3469679107732795669}
+  particles: {fileID: 3469679107732795669}
 --- !u!1 &6921839728142767394
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using DV.Shops;
@@ -14,7 +15,7 @@ namespace RedworkDE.DvLamps
 
 		static LampLoader()
 		{
-			_bundle = AssetBundle.LoadFromStream(typeof(LampLoader).Assembly.GetManifestResourceStream(typeof(LampLoader), "lamps"));
+			_bundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(typeof(LampLoader).Assembly.Location), "lamps"));
 			Logger.LogInfo($"Lamp loader: {_bundle}");
 
 			WorldStreamingInit.LoadingFinished += CreateShopItems;
@@ -24,15 +25,22 @@ namespace RedworkDE.DvLamps
 		{
 			Logger.LogDebug("Create shop items");
 
-			var spec = _bundle.LoadAsset<GameObject>("MagicLamp").GetComponent<InventoryItemSpec>();
+			if (!_bundle)
+			{
+				Logger.LogError("Failed to load lamps bundle");
+				return;
+			}
+
+			//var spec = _bundle.LoadAsset<GameObject>("MagicLamp").GetComponent<InventoryItemSpec>();
+			var spec = _bundle.LoadAsset<GameObject>("FlashLight").GetComponent<InventoryItemSpec>();
 
 			Logger.LogDebug($"Item spec: {spec}");
 
 			GlobalShopController.Instance.shopItemsData.Add(new ShopItemData()
 			{
 				item = spec,
-				basePrice = 10000,
-				amount = 1,
+				basePrice = 100,
+				amount = 100,
 				isGlobal = true,
 			});
 			GlobalShopController.Instance.initialItemAmounts.Add(1);
@@ -79,7 +87,7 @@ namespace RedworkDE.DvLamps
 
 				Logger.LogDebug($"Resource load: {path}");
 
-				if (path.StartsWith(prefix))
+				if (path is {} && _bundle != null && path.StartsWith(prefix))
 				{
 					__result = _bundle.LoadAsset(path.Substring(prefix.Length));
 					return false;
@@ -87,17 +95,6 @@ namespace RedworkDE.DvLamps
 
 				return true;
 			}
-		}
-
-		[HarmonyPatch(typeof(Inventory), nameof(Inventory.AddItemToInventory), typeof(GameObject), typeof(int)), HarmonyPrefix]
-		static void Inventory_AddItemToInventory_Patch(GameObject item)
-		{
-			// would like to do this from magic item, but while there is a before remove there is no before add event
-
-			Logger.LogDebug($"Add item to inventory: {item}");
-
-			var lamp = item.GetComponent<MagicLamp>();
-			if (lamp) lamp.Disable();
 		}
 	}
 }

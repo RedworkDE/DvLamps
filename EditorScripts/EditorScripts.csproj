@@ -14,8 +14,8 @@
     <Deterministic>True</Deterministic>
     <DebugType>None</DebugType>
 
-    <Unity Condition="'$(Unity)' == '' and Exists('C:\Program Files\Unity\2019.2.21f1')">C:\Program Files\Unity\2019.2.9f1\</Unity>
-    <Unity Condition="'$(Unity)' == '' and Exists('D:\Program Files\Unity\2019.2.21f1')">D:\Program Files\Unity\2019.2.9f1\</Unity>
+    <Unity Condition="'$(Unity)' == '' and Exists('C:\Program Files\Unity\2019.2.9f1')">C:\Program Files\Unity\2019.2.9f1\</Unity>
+    <Unity Condition="'$(Unity)' == '' and Exists('D:\Program Files\Unity\2019.2.9f1')">D:\Program Files\Unity\2019.2.9f1\</Unity>
 
     <OutputPath>..\DvLamps\Assets\Editor</OutputPath>
   </PropertyGroup>

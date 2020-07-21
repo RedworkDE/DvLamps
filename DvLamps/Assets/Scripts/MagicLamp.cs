@@ -2,33 +2,32 @@
 
 public class MagicLamp : MonoBehaviour
 {
-	public ParticleSystem _particles;
+	public ParticleSystem particles;
+	private Transform particleTracker;
 
 	void Start()
 	{
-		Inventory.Instance.ItemRemovedFromInventory += (go, n) =>
-		{
-			Debug.Log("Item removed from inventory: " + go);
+		particleTracker = new GameObject().transform;
+		particleTracker.parent = particles.transform.parent;
+		particleTracker.localPosition = particles.transform.localPosition;
+		particleTracker.localRotation = particles.transform.localRotation;
+		particles.transform.SetParent(PlayerManager.PlayerTransform, false);
 
-			var lamp = go.GetComponent<MagicLamp>();
-			if (lamp) lamp.Enable();
-		};
 	}
 
-	void Awake()
+	void Update()
 	{
-		_particles.Play(false);
+		particles.transform.position = particleTracker.position;
+		particles.transform.rotation = particleTracker.rotation;
 	}
 
-	public void Enable()
+	public void OnEnable()
 	{
-		_particles.transform.SetParent(transform, false);
-		_particles.Play(false);
+		particles.Play(false);
 	}
 
-	public void Disable()
+	public void OnDisable()
 	{
-		_particles.transform.SetParent(PlayerManager.PlayerTransform, false);
-		_particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+		particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 	}
 }

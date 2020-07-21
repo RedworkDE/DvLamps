@@ -22,7 +22,7 @@ public class ExportBundle
 		File.Delete("build/AssetBundles/lamps.manifest");
 
 
-		var result = BuildPipeline.BuildAssetBundles("build/AssetBundles", build, BuildAssetBundleOptions.UncompressedAssetBundle, BuildTarget.StandaloneWindows64);
+		var result = BuildPipeline.BuildAssetBundles("build/AssetBundles", build, BuildAssetBundleOptions.UncompressedAssetBundle | BuildAssetBundleOptions.StrictMode, BuildTarget.StandaloneWindows64);
 
 		if (!result)
 		{

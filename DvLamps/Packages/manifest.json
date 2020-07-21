@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "com.unity.xr.openvr.standalone": "1.0.5",
     "com.unity.modules.assetbundle": "1.0.0",
-    "com.unity.modules.particlesystem": "1.0.0"
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.vr": "1.0.0"
   }
 }
