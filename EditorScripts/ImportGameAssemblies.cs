@@ -78,6 +78,7 @@ public class ImportGameAssemblies
 		var asmPath = Path.Combine(DvInstall, ASSEMBLIES_REMOTE);
 
 		if (!Directory.Exists(asmPath)) return;
+		Directory.CreateDirectory(ASSEMBLIES_LOCAL);
 
 		var update = false;
 
