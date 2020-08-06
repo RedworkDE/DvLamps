@@ -1,6 +1,5 @@
 ﻿#if BepInEx
 using BepInEx.Logging;
-
 #endif
 
 namespace RedworkDE.DvLamps

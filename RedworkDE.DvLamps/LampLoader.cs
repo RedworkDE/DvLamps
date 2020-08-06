@@ -43,7 +43,7 @@ namespace RedworkDE.DvLamps
 				amount = 100,
 				isGlobal = true,
 			});
-			GlobalShopController.Instance.initialItemAmounts.Add(1);
+			GlobalShopController.Instance.initialItemAmounts.Add(100);
 
 			Logger.LogDebug("Added global shop data");
 

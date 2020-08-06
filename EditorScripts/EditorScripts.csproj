@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Reference Include="$(Unity)Editor\Data\Managed\UnityEditor.dll" Private="False"/>
-    <Reference Include="$(Unity)Editor\Data\Managed\UnityEngine\Unity.Cecil.dll" Private="False"/>
     <Reference Include="$(Unity)Editor\Data\Managed\UnityEngine\UnityEngine.dll" Private="False"/>
     <Reference Include="$(Unity)Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" Private="False"/>
     <Reference Include="$(Unity)Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll" Private="False"/>

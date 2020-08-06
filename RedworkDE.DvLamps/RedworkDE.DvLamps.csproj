@@ -20,7 +20,7 @@
 
     <Authors>RedworkDE</Authors>
     <Copyright>(c) 2020 RedworDE</Copyright>
-    <Version>1.0.0</Version>
+    <Version>0.1.0</Version>
 
     <!-- Configuration Switches -->
     <_IsDebug>False</_IsDebug>
@@ -69,7 +69,7 @@
         <Reference Include="$(GameDirectory)DerailValley_Data\Managed\UnityModManager\0Harmony.dll" Private="False" />
        
         <None Update="Info.json">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
       </ItemGroup>
     </When>
@@ -91,6 +91,7 @@
   <ItemGroup>
     <PackageReference Include="RedworkDE.Publicizer" Version="0.1.0" />
     <PublicizeAssembly Include="Assembly-CSharp" Private="True" />
+    <PublicizeAssembly Include="DV.Interaction" Private="True" />
     <PublicizeAssembly Include="0Harmony" Private="True" />
   </ItemGroup>
 
@@ -99,6 +100,8 @@
     <!-- Derail Valleys DLL to reference, everything that cant be referenced here must be copied to the build output -->
     <Reference Include="Assembly-CSharp" />
     <Reference Include="DV.Utils" />
+    <Reference Include="DV.Interaction" />
+    <Reference Include="Stateless" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime" />
