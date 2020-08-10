@@ -3,13 +3,10 @@ using VRTK;
 
 namespace RedworkDE.DvLamps
 {
-	public class BeltLoader : AutoLoad<BeltLoader>
+	public class BeltLoader
 	{
-		static BeltLoader()
-		{
-			WorldStreamingInit.add_LoadingFinished(Loaded);
-		}
 
+		[AutoLoad(LoadTime.GameLoaded)]
 		private static void Loaded()
 		{
 			if (!VRManager.IsVREnabled()) return;

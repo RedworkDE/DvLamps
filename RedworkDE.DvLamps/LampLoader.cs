@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -9,32 +10,32 @@ using Object = UnityEngine.Object;
 
 namespace RedworkDE.DvLamps
 {
-	public class LampLoader : AutoLoad<LampLoader>
+	public class LampLoader
 	{
-		private static readonly AssetBundle _bundle;
+		private static AssetBundle _bundle;
 
-		static LampLoader()
+		[AutoLoad]
+		static void Init()
 		{
 			_bundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(typeof(LampLoader).Assembly.Location), "lamps"));
-			Logger.LogInfo($"Lamp loader: {_bundle}");
-
-			WorldStreamingInit.LoadingFinished += CreateShopItems;
+			Log.Info($"Lamp loader: {_bundle}");
 		}
 
+		[AutoLoad(LoadTime.GameLoaded)]
 		static void CreateShopItems()
 		{
-			Logger.LogDebug("Create shop items");
+			Log.Debug("Create shop items");
 
 			if (!_bundle)
 			{
-				Logger.LogError("Failed to load lamps bundle");
+				Log.Error("Failed to load lamps bundle");
 				return;
 			}
 
 			//var spec = _bundle.LoadAsset<GameObject>("MagicLamp").GetComponent<InventoryItemSpec>();
 			var spec = _bundle.LoadAsset<GameObject>("FlashLight").GetComponent<InventoryItemSpec>();
 
-			Logger.LogDebug($"Item spec: {spec}");
+			Log.Debug($"Item spec: {spec}");
 
 			GlobalShopController.Instance.shopItemsData.Add(new ShopItemData()
 			{
@@ -43,14 +44,19 @@ namespace RedworkDE.DvLamps
 				amount = 100,
 				isGlobal = true,
 			});
-			GlobalShopController.Instance.initialItemAmounts.Add(100);
+#if PUBLICIZER_ASSEMBLY_CSHARP
+			GlobalShopController.Instance.initialItemAmounts
+#else
+			((List<int>)typeof(GlobalShopController).GetField("initialItemAmounts", BindingFlags.Instance|BindingFlags.NonPublic).GetValue(GlobalShopController.Instance))
+#endif
+				.Add(100);
 
-			Logger.LogDebug("Added global shop data");
+			Log.Debug("Added global shop data");
 
 			var shops = Object.FindObjectsOfType<Shop>();
 			foreach (var shop in shops)
 			{
-				Logger.LogDebug($"adding to shop {shop}");
+				Log.Debug($"adding to shop {shop}");
 
 				var findMax = shop.scanItemResourceModules.FindMax(r => r.transform.localPosition.x);
 				var resource = Object.Instantiate(findMax);
@@ -58,9 +64,13 @@ namespace RedworkDE.DvLamps
 				resource.transform.parent = findMax.transform.parent;
 				resource.transform.localRotation = findMax.transform.localRotation;
 				resource.transform.localPosition = findMax.transform.localPosition + Vector3.right * 0.6f;
+#if PUBLICIZER_ASSEMBLY_CSHARP
 				resource.Start(); // call start again to fix texts
+#else
+				typeof(ScanItemResourceModule).GetMethod("Start", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(resource, null);
+#endif
 
-				Logger.LogDebug($"new item sign: {resource}");
+				Log.Debug($"new item sign: {resource}");
 				
 				var arr = new ScanItemResourceModule[shop.scanItemResourceModules.Length + 1];
 				Array.Copy(shop.scanItemResourceModules, 0, arr, 0, shop.scanItemResourceModules.Length);
@@ -70,7 +80,7 @@ namespace RedworkDE.DvLamps
 				resource.ItemPurchased += GlobalShopController.Instance.AddItemToInstatiationQueue;
 			}
 
-			Logger.LogDebug("done");
+			Log.Debug("done");
 		}
 
 		[HarmonyPatch]
@@ -85,7 +95,7 @@ namespace RedworkDE.DvLamps
 			{
 				const string prefix = "RedworkDE.DvLamps.";
 
-				Logger.LogDebug($"Resource load: {path}");
+				Log.Debug($"Resource load: {path}");
 
 				if (path is {} && _bundle != null && path.StartsWith(prefix))
 				{

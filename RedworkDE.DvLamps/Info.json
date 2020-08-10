@@ -1,9 +1,3 @@
 {
-  "Id": "RedworkDE.DvTime",
-  "DisplayName": "Functional Clocks",
-  "Author": "RedworkDE",
-  "Version": "$Version",
-  "EntryMethod": "RedworkDE.DvTime.AutoLoadManager.Load",
-  "LoadAfter": [ "UnencryptedSaveGameMod" ],
-  "repository": "https://raw.githubusercontent.com/RedworkDE/DvTime/master/Repository.json"
+  "repository": "https://raw.githubusercontent.com/RedworkDE/DvLamps/master/Repository.json"
 }
