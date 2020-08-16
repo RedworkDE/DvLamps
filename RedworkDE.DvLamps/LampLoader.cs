@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -60,6 +61,7 @@ namespace RedworkDE.DvLamps
 
 				var findMax = shop.scanItemResourceModules.FindMax(r => r.transform.localPosition.x);
 				var resource = Object.Instantiate(findMax);
+				resource.gameObject.SetActive(true);
 				resource.sellingItemSpec = spec;
 				resource.transform.parent = findMax.transform.parent;
 				resource.transform.localRotation = findMax.transform.localRotation;
@@ -82,7 +84,7 @@ namespace RedworkDE.DvLamps
 
 			Log.Debug("done");
 		}
-
+		
 		[HarmonyPatch]
 		class Resources_Patch
 		{
