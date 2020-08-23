@@ -8,18 +8,22 @@
     <Platforms>x64</Platforms>
     <LangVersion>latest</LangVersion>
     <Product>Flashlight Item</Product>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>RedworkDE</Authors>
+
+    <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
+
+    <RepositoryUrl>https://github.com/RedworkDE/DvLamps</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RedworkDE.DerailValley.ModBase" Version="0.1.84" />
+    <PackageReference Include="RedworkDE.DerailValley.ModBase" Version="0.1.119" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove=".gitignore" />
-    <None Remove="DvTimeEmbedded.dll" />
-    <Reference Include="DvTimeEmbedded.dll" />
+    <None Remove="DvLampsEmbedded.dll" />
+    <Reference Include="DvLampsEmbedded.dll" />
     <None Update="lamps" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
@@ -32,7 +36,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Error Condition="!Exists('DvTimeEmbedded.dll')" Text="embedded dll must be build, open the unity project, click Build/All" />
+    <Error Condition="!Exists('DvLampsEmbedded.dll')" Text="embedded dll must be build, open the unity project, click Build/All" />
     <Error Condition="!Exists('lamps')" Text="lamps bundle must be build, open the unity project, click Build/All" />
   </Target>
 </Project>
