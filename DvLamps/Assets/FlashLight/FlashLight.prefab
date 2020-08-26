@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4780648881450236494}
-  - component: {fileID: 271518442730042373}
+  - component: {fileID: 5589967973326169838}
   m_Layer: 0
   m_Name: '[collider]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4780648881450236494
 Transform:
   m_ObjectHideFlags: 0
@@ -31,20 +31,18 @@ Transform:
   m_Father: {fileID: 5031207318709020039}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &271518442730042373
-CapsuleCollider:
+--- !u!114 &5589967973326169838
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28350737396646582}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.035
-  m_Height: 0.2
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.015}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ead0b259a20c0b4785c29a3b8055a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1408317834486138059
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsHeadAttached: 0
+  collider: {fileID: 5589967973326169838}
 --- !u!114 &777088956772445487
 MonoBehaviour:
   m_ObjectHideFlags: 0
