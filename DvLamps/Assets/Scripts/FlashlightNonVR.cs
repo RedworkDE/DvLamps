@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class FlashlightNonVR : MonoBehaviour
@@ -63,6 +64,20 @@ public class FlashlightNonVR : MonoBehaviour
 			transform.position = Camera.main.transform.position + Camera.main.transform.rotation * Vector3.up * 0.3f;
 			transform.rotation = Camera.main.transform.rotation;
 		}
-
+	}
+	
+	void OnDisable()
+	{
+		if (IsHeadAttached) 
+		{
+			CoroutineManager.Instance.Run(EnableObject());
+		}
+	}
+	
+	IEnumerator EnableObject() 
+	{
+		yield return null;
+		gameObject.SetActive(true);
 	}
 }
+
