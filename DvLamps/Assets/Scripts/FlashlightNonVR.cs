@@ -7,8 +7,9 @@ public class FlashlightNonVR : MonoBehaviour
 	public static Action<Grabber> ThrowGrabber;
 	public static KeyCode[] toggleFlashLightKeys = {KeyCode.P};
 	
+	[HideInInspector]
 	public bool IsHeadAttached;
-	public FlashlightCollider collider;
+	public ToggleColliderGroup collider;
 	private AGrabHandler grabHandler;
 	private Grabber grabber;
 
@@ -44,7 +45,7 @@ public class FlashlightNonVR : MonoBehaviour
 
 				grabHandler.interactionAllowed = true;
 				IsHeadAttached = false;
-				collider.gameObject.SetActive(false);
+				collider.Enable();
 			}
 			else if (grabHandler.IsGrabbed()) 
 			{
@@ -54,7 +55,7 @@ public class FlashlightNonVR : MonoBehaviour
 				ThrowGrabber(grabber);
 				grabHandler.interactionAllowed = false; // suppress being able to pick item up, while attached to head at some angles
 				IsHeadAttached = true;
-				collider.gameObject.SetActive(false);
+				collider.Disable();
 			}
 		}
 	}
