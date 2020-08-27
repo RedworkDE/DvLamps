@@ -8,12 +8,22 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
     public Button buttonSpec;
 	public Light light;
 	public MeshRenderer lightMesh;
-	
+
+	public MeshRenderer[] meshes;
+	public Texture[] variants;
+	private int variant;
+
 	private ButtonBase button;
 	private ItemBase item;
 	private ItemScrolling itemScrolling;
 
 	private FlashlightState state;
+
+	void Awake()
+	{
+		SetState(FlashlightState.Enabled);
+		SetVariant(-1);
+	}
 
 	private void Start()
 	{
@@ -26,8 +36,6 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 			itemScrolling = gameObject.AddComponent<ItemScrollingVR>();
 		else
 			itemScrolling = gameObject.AddComponent<ItemScrollingNonVR>();
-
-		SetState(FlashlightState.Enabled);
 	}
 
 	private void Button_Used()
@@ -37,6 +45,8 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 
 	private void SetState(FlashlightState newState)
 	{
+		Debug.Log("set state: " + newState);
+
 		state = newState;
 		switch (state)
 		{
@@ -63,19 +73,28 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 		}
 	}
 
+	private void SetVariant(int num)
+	{
+		variant = num < 0 || num >= variants.Length ? Random.Range(0, variants.Length) : num;
+		foreach (var mesh in meshes)
+			mesh.material.SetTexture("_MainTex", variants[variant]);
+	}
+
 	public JObject GetStateSaveData()
 	{
-		return new JObject()
+		return JObject.FromObject(new SaveData()
 		{
-			{"state", new JValue(state)}
-		};
+			state = state,
+			variant = variant
+		});
 	}
 
 	public void SetStateSaveData(JObject data)
 	{
 		if (data is null) return;
-		var stateVal = data["state"];
-		state = stateVal.Value<FlashlightState>();
+		var stateData = data.ToObject<SaveData>();
+		SetState(stateData.state);
+		SetVariant(stateData.variant);
 	}
 
 	public enum FlashlightState
@@ -83,5 +102,11 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 		Enabled,
 		Disabled,
 		MAX_VALUE
+	}
+
+	public class SaveData
+	{
+		public FlashlightState state = FlashlightState.Enabled;
+		public int variant = -1;
 	}
 }

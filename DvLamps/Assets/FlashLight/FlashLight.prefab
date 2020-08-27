@@ -345,6 +345,15 @@ MonoBehaviour:
   buttonSpec: {fileID: 1880414865070200055}
   light: {fileID: 7626688096315608368}
   lightMesh: {fileID: 4035699703582425532}
+  meshes:
+  - {fileID: 4040515329346692613}
+  - {fileID: 4035699703582425532}
+  - {fileID: 6294145409550531073}
+  variants:
+  - {fileID: 2800000, guid: a73a30416eeb70c429e078310410cf47, type: 3}
+  - {fileID: 2800000, guid: 17230b77ae20151489619e9a8ecd9381, type: 3}
+  - {fileID: 2800000, guid: 68e5ad0c8eebe374c8bc903fb000a8f1, type: 3}
+  - {fileID: 2800000, guid: b8be70f4b81b1fc40b59ccc0e7e11e2c, type: 3}
 --- !u!114 &2566235911419390293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,9 +602,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1768351861806570747}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6294145409550531073 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5752004099412043514, guid: a47a2be0dea4377468f05c09d6e61e35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1768351861806570747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1097518813943607132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1707243787577406375, guid: a47a2be0dea4377468f05c09d6e61e35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1768351861806570747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4040515329346692613 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6874540395504895234, guid: a47a2be0dea4377468f05c09d6e61e35,
     type: 3}
   m_PrefabInstance: {fileID: 1768351861806570747}
   m_PrefabAsset: {fileID: 0}
