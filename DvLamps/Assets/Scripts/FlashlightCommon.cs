@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlashlightCommon : MonoBehaviour, IStateSave
 {
     public Button buttonSpec;
+	public Rotary rotarySpec; 
 	public Light light;
 	public MeshRenderer lightMesh;
 
@@ -14,8 +15,11 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 	private int variant;
 
 	private ButtonBase button;
+	private RotaryBase rotary;
 	private ItemBase item;
 	private ItemScrolling itemScrolling;
+
+	private float focus;
 
 	private FlashlightState state;
 
@@ -23,12 +27,15 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 	{
 		SetState(FlashlightState.Enabled);
 		SetVariant(-1);
+		FlashlightWindow.Instance.value = 0;
 	}
 
 	private void Start()
 	{
 		button = buttonSpec.GetComponent<ButtonBase>();
 		button.Used += Button_Used;
+		rotary = rotarySpec.GetComponent<RotaryBase>();
+		rotary.ValueChanged += Rotary_ValueChanged;
 		item = GetComponent<ItemBase>();
 		item.Used += () => button.Use();
 
@@ -36,6 +43,20 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 			itemScrolling = gameObject.AddComponent<ItemScrollingVR>();
 		else
 			itemScrolling = gameObject.AddComponent<ItemScrollingNonVR>();
+		itemScrolling.Scrolled += ItemScrolling_Scrolled;
+	}
+
+	private void Rotary_ValueChanged(ValueChangedEventArgs args)
+	{
+		Debug.Log(args.newValue);
+	}
+
+	private void ItemScrolling_Scrolled(ItemScrollDirection dir)
+	{
+		if (dir == ItemScrollDirection.Left || dir == ItemScrollDirection.Right)
+		{
+			rotary.SetValue(rotary.Value + ((dir != ItemScrollDirection.Left) ? 1 : -1) * (1 / rotarySpec.notches));
+		}
 	}
 
 	private void Button_Used()
@@ -45,8 +66,6 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 
 	private void SetState(FlashlightState newState)
 	{
-		Debug.Log("set state: " + newState);
-
 		state = newState;
 		switch (state)
 		{
@@ -108,5 +127,20 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 	{
 		public FlashlightState state = FlashlightState.Enabled;
 		public int variant = -1;
+	}
+}
+
+public class FlashlightWindow : SingletonBehaviour<FlashlightWindow>
+{
+	public static new string AllowAutoCreate()
+	{
+		return nameof(FlashlightWindow);
+	}
+
+	public float value;
+
+	public void OnGUI()
+	{
+		GUILayout.Label(value.ToString());
 	}
 }
