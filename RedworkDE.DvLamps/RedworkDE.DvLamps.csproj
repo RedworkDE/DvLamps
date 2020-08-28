@@ -8,7 +8,7 @@
     <Platforms>x64</Platforms>
     <LangVersion>latest</LangVersion>
     <Product>Flashlight Item</Product>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>RedworkDE</Authors>
 
     <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
