@@ -31,7 +31,6 @@ public class FlashlightNonVR : MonoBehaviour
 		{
 			if (IsHeadAttached)
 			{
-				IsHeadAttached = false; // avoid reenabling flashlight when adding to inventory
 
 				if (!grabber.IsHoldingItem())
 				{
@@ -46,7 +45,7 @@ public class FlashlightNonVR : MonoBehaviour
 				}
 
 				grabHandler.interactionAllowed = true;
-				collider.Enable();
+				IsHeadAttached = false;
 			}
 			else if (grabHandler.IsGrabbed()) 
 			{
@@ -56,9 +55,10 @@ public class FlashlightNonVR : MonoBehaviour
 				ThrowGrabber(grabber);
 				grabHandler.interactionAllowed = false; // suppress being able to pick item up, while attached to head at some angles
 				IsHeadAttached = true;
-				collider.Disable();
 			}
 		}
+
+		collider.SetActive(!IsHeadAttached);
 	}
 
 	void LateUpdate()
