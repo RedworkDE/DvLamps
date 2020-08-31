@@ -27,7 +27,7 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 	{
 		SetState(FlashlightState.Enabled);
 		SetVariant(-1);
-		FlashlightWindow.Instance.value = 0;
+		//FlashlightWindow.Instance.value = 0;
 	}
 
 	private void Start()
@@ -48,7 +48,7 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 
 	private void Rotary_ValueChanged(ValueChangedEventArgs args)
 	{
-		Debug.Log(args.newValue);
+		//Debug.Log(args.newValue);
 	}
 
 	private void ItemScrolling_Scrolled(ItemScrollDirection dir)

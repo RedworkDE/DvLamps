@@ -31,6 +31,8 @@ public class FlashlightNonVR : MonoBehaviour
 		{
 			if (IsHeadAttached)
 			{
+				IsHeadAttached = false; // avoid reenabling flashlight when adding to inventory
+
 				if (!grabber.IsHoldingItem())
 				{
 					// if no item in hand, pick it up
@@ -44,7 +46,6 @@ public class FlashlightNonVR : MonoBehaviour
 				}
 
 				grabHandler.interactionAllowed = true;
-				IsHeadAttached = false;
 				collider.Enable();
 			}
 			else if (grabHandler.IsGrabbed()) 
