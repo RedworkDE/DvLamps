@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FlashlightCommon : MonoBehaviour, IStateSave
 {
-    public Button buttonSpec;
+	public Button buttonSpec;
 	public Rotary rotarySpec; 
 	public Light light;
 	public MeshRenderer lightMesh;

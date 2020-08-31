@@ -545,7 +545,7 @@ MonoBehaviour:
   allowPlayerRotationXAxisVr: 1
   allowPlayerRotationYAxisVr: 1
   precisionGrab: 1
-  controllerAttachMethod: 0
+  controllerAttachMethod: 2
   disableCollisionsWhileHeld: 0
   isPlaceableInBelt: 1
   isUprightInBelt: 0
