@@ -9,7 +9,7 @@ namespace RedworkDE.DvLamps
 		[HarmonyPatch(typeof(ItemInteractionTextScanNonVr), nameof(ItemInteractionTextScanNonVr.Update)), HarmonyPrefix]
 		static bool Patch(ItemInteractionTextScanNonVr __instance)
 		{
-			if (SingletonBehaviour<InteractionTextControllerNonVr>.Exists && !__instance.grabber.IsGrabbingOrInMouseLook() && __instance.ScanHit() && __instance.currentHit.rigidbody?.GetComponent<ItemNonVR>())
+			if (SingletonBehaviour<InteractionTextControllerNonVr>.Exists && !__instance.grabber.IsGrabbingOrInMouseLook() && __instance.ScanHit(false) && __instance.currentHit.rigidbody?.GetComponent<ItemNonVR>())
 			{
 				var grabber = __instance.currentHit.rigidbody?.GetComponent<AGrabHandler>();
 				if (grabber && !grabber.interactionAllowed) return false;

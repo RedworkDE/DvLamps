@@ -116,6 +116,18 @@ public class FlashlightCommon : MonoBehaviour, IStateSave
 		SetVariant(stateData.variant);
 	}
 
+	public static void OrientFlashlight(Transform target, Transform camera)
+	{
+		if (Physics.Raycast(camera.position, camera.rotation * Vector3.forward, out var hit))
+		{
+			target.rotation = Quaternion.LookRotation(hit.point - target.position);
+		}
+		else
+		{
+			target.rotation = camera.rotation;
+		}
+	}
+
 	public enum FlashlightState
 	{
 		Enabled,

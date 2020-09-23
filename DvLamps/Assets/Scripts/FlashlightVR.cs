@@ -3,7 +3,6 @@ using VRTK;
 
 public class FlashlightVR : MonoBehaviour
 {
-	public float RotateSpeed;
 	private Transform _headset;
 
     void Start()
@@ -21,7 +20,7 @@ public class FlashlightVR : MonoBehaviour
     {
 	    if (IsInBelt())
 	    {
-		    transform.rotation = Quaternion.RotateTowards(transform.rotation, _headset.rotation, RotateSpeed * Time.deltaTime);
+			FlashlightCommon.OrientFlashlight(transform, _headset);
 	    }
     }
 

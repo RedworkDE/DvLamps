@@ -8,7 +8,7 @@
     <Platforms>x64</Platforms>
     <LangVersion>latest</LangVersion>
     <Product>Flashlight Item</Product>
-    <Version>1.3.3</Version>
+    <Version>1.3.4</Version>
     <Authors>RedworkDE</Authors>
 
     <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
@@ -17,14 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RedworkDE.DerailValley.ModBase" Version="0.1.124" />
+    <PackageReference Include="RedworkDE.DerailValley.ModBase" Version="0.1.125" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove=".gitignore" />
-    <None Remove="DvLampsEmbedded.dll" />
-    <Reference Include="DvLampsEmbedded.dll" />
-    <None Update="lamps" CopyToOutputDirectory="PreserveNewest" />
+    <Reference Include="../publish/bin/RedworkDE.DvLamps.Embedded.dll" />
+    <None Include="../publish/bin/lamps" CopyToOutputDirectory="PreserveNewest" Visible="False"/>
   </ItemGroup>
 
   <!-- add one entry for each assembly where access to private members is required -->
@@ -36,7 +35,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Error Condition="!Exists('DvLampsEmbedded.dll')" Text="embedded dll must be build, open the unity project, click Build/All" />
-    <Error Condition="!Exists('lamps')" Text="lamps bundle must be build, open the unity project, click Build/All" />
+    <Error Condition="!Exists('../publish/bin/RedworkDE.DvLamps.Embedded.dll')" Text="embedded dll must be build, open the unity project, click Build/All $([System.IO.Path]::GetFullPath('../publish/bin/RedworkDE.DvLamps.Embedded.dll'))" />
+    <Error Condition="!Exists('../publish/bin/lamps')" Text="lamps bundle must be build, open the unity project, click Build/All" />
   </Target>
 </Project>

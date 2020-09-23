@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1711618417, guid: 72c89f97403c42a42aaf8a1911eedb0e, type: 3}
+  m_Name: ModInfo
+  m_EditorClassIdentifier: 
+  ModId: RedworkDE.DvLamps.Embedded
+  DisplayName: Flashlight Item
+  Author: RedworkDE
+  Version: 1.4.0
+  RepositoryUrl: https://github.com/RedworkDE/DvLamps
+  NoLogging: 0
+  EnableLogging: 1
+  EnableLoggingFatal: 1
+  EnableLoggingError: 1
+  EnableLoggingWarning: 1
+  EnableLoggingMessage: 1
+  EnableLoggingInfo: 1
+  EnableLoggingDebug: 1
+  NoHarmony: 0
+  MockHarmony: 0
+  NoHooks: 0

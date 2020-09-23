@@ -66,7 +66,7 @@ public class FlashlightNonVR : MonoBehaviour
 		if (IsHeadAttached)
 		{
 			transform.position = Camera.main.transform.position + Camera.main.transform.rotation * Vector3.up * 0.3f;
-			transform.rotation = Camera.main.transform.rotation;
+			FlashlightCommon.OrientFlashlight(transform, Camera.main.transform);
 		}
 	}
 	
